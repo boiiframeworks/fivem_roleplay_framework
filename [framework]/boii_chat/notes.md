@@ -1,0 +1,1 @@
+-> Fixed mistype with disabling clear_all command.
