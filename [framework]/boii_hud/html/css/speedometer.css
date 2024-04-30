@@ -1,0 +1,169 @@
+/*
+     ____   ____ _____ _____   _   _____  ________      ________ _      ____  _____  __  __ ______ _   _ _______ 
+    |  _ \ / __ \_   _|_   _| | | |  __ \|  ____\ \    / /  ____| |    / __ \|  __ \|  \/  |  ____| \ | |__   __|
+    | |_) | |  | || |   | |   | | | |  | | |__   \ \  / /| |__  | |   | |  | | |__) | \  / | |__  |  \| |  | |   
+    |  _ <| |  | || |   | |   | | | |  | |  __|   \ \/ / |  __| | |   | |  | |  ___/| |\/| |  __| | . ` |  | |   
+    | |_) | |__| || |_ _| |_  | | | |__| | |____   \  /  | |____| |___| |__| | |    | |  | | |____| |\  |  | |   
+    |____/ \____/_____|_____| | | |_____/|______|   \/   |______|______\____/|_|    |_|  |_|______|_| \_|  |_|   
+                              | |                                                                                
+                              |_|                  HUD
+*/
+
+.speedo_container {
+    position: fixed;
+    right: 0vw;
+    bottom: 2vh;
+    height: 12.5vh;
+    width: 12vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1%;
+}
+
+.gear_indicator {
+    position: absolute;
+    top: 0;
+    font-family: 'Kanit';
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px -1px 1px rgba(0, 0, 0, 1), -1px 1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
+    height: 30%;
+    width: 100%;
+    padding: 1%;
+    margin-right: 3px;
+}
+
+.gear_indicator:before {
+    content: '';
+    width: 3%;
+    border-bottom: solid 2px #1f1e1e;
+    border-radius: 10px;
+    position: absolute;
+    left: 43%;
+    top: 30%;
+    z-index: 1;
+}
+
+.gear_indicator:after {
+    content: '';
+    width: 3%;
+    border-bottom: solid 2px #1f1e1e;
+    border-radius: 10px;
+    position: absolute;
+    left: 54%;
+    top: 30%;
+    z-index: 1;
+}
+
+.speed_indicator {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px -1px 1px rgba(0, 0, 0, 1), -1px 1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
+    padding: 1%;
+}
+
+.speed_indicator .speed {
+    font-size: 3.5rem;
+    font-family: 'Kanit';
+    margin-top: -1.5vh;
+    padding: 1%;
+}
+
+.speed_indicator .speed_unit {
+    margin-top: -1.5vh;
+    font-size: 1rem;
+    font-family: 'Kanit';
+    padding: 1%;
+}
+
+.mileage_indicator {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px -1px 1px rgba(0, 0, 0, 1), -1px 1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
+    font-size: 1rem;
+    font-family: 'Kanit';
+    padding: 1%;
+    letter-spacing: 3px;
+    margin-top: 0.5vh;
+}
+
+.indicator_icons {
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 0.8rem;
+    padding: 1%;
+}
+
+.indicator_icons i {
+    padding: 1%;
+}
+
+.vehicle_body_bar {
+    position: absolute;
+    top: -25%;
+    left: -2%;
+    rotate: -135deg;
+    height: 20vh;
+    width: 100%;
+}
+
+.vehicle_engine_bar {
+    position: absolute;
+    left: -5%;
+    top: 5%;
+    rotate: -45deg;
+}
+
+.body_health_icon {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    color: white;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px -1px 1px rgba(0, 0, 0, 1), -1px 1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
+    font-size: 0.75rem;
+    padding: 1%;
+}
+
+.engine_health_icon {
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    color: white;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 1), 1px -1px 1px rgba(0, 0, 0, 1), -1px 1px 1px rgba(0, 0, 0, 1), 1px 1px 1px rgba(0, 0, 0, 1);
+    font-size: 0.75rem;
+    padding: 1%;
+}
+
+.fuel_progress {
+    position: absolute;
+    bottom: 0;
+    width: 45%;
+    height: 1.2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.fuel_segment {
+    flex: 1;
+    margin: 0 1%;
+    background-color: #1f1e1e;
+    border: 1px solid rgba(31, 30, 30, 0.5);
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.fuel_segment.filled {
+    background-color: white;
+}

@@ -1,0 +1,32 @@
+/*
+     ____   ____ _____ _____   _   _____  ________      ________ _      ____  _____  __  __ ______ _   _ _______ 
+    |  _ \ / __ \_   _|_   _| | | |  __ \|  ____\ \    / /  ____| |    / __ \|  __ \|  \/  |  ____| \ | |__   __|
+    | |_) | |  | || |   | |   | | | |  | | |__   \ \  / /| |__  | |   | |  | | |__) | \  / | |__  |  \| |  | |   
+    |  _ <| |  | || |   | |   | | | |  | |  __|   \ \/ / |  __| | |   | |  | |  ___/| |\/| |  __| | . ` |  | |   
+    | |_) | |__| || |_ _| |_  | | | |__| | |____   \  /  | |____| |___| |__| | |    | |  | | |____| |\  |  | |   
+    |____/ \____/_____|_____| | | |_____/|______|   \/   |______|______\____/|_|    |_|  |_|______|_| \_|  |_|   
+                              | |                                                                                
+                              |_|                  HUD
+*/
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+/* Root settings */
+:root {
+
+    --health_segment_colour: rgba(255, 255, 255, 1);
+    --armour_segment_colour: rgba(60, 60, 60, 1);
+    
+    --hunger_fill_colour: rgba(255, 255, 255, 1);
+    --thirst_fill_colour: rgba(255, 255, 255, 1);
+    --hygiene_fill_colour: rgba(255, 255, 255, 1);
+    --stress_fill_colour: rgba(255, 255, 255, 1);
+    --oxygen_fill_colour: rgba(255, 255, 255, 1);
+
+    --hunger_border_colour: rgba(255, 255, 255, 0.3);
+    --thirst_border_colour: rgba(255, 255, 255, 0.3);
+    --hygiene_border_colour: rgba(255, 255, 255, 0.3);
+    --stress_border_colour: rgba(255, 255, 255, 0.3);
+    --oxygen_border_colour: rgba(255, 255, 255, 0.3);
+} 

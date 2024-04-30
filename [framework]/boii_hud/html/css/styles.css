@@ -1,0 +1,355 @@
+/*
+     ____   ____ _____ _____   _   _____  ________      ________ _      ____  _____  __  __ ______ _   _ _______ 
+    |  _ \ / __ \_   _|_   _| | | |  __ \|  ____\ \    / /  ____| |    / __ \|  __ \|  \/  |  ____| \ | |__   __|
+    | |_) | |  | || |   | |   | | | |  | | |__   \ \  / /| |__  | |   | |  | | |__) | \  / | |__  |  \| |  | |   
+    |  _ <| |  | || |   | |   | | | |  | |  __|   \ \/ / |  __| | |   | |  | |  ___/| |\/| |  __| | . ` |  | |   
+    | |_) | |__| || |_ _| |_  | | | |__| | |____   \  /  | |____| |___| |__| | |    | |  | | |____| |\  |  | |   
+    |____/ \____/_____|_____| | | |_____/|______|   \/   |______|______\____/|_|    |_|  |_|______|_| \_|  |_|   
+                              | |                                                                                
+                              |_|                  HUD
+*/
+
+:root {
+     
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+body {
+    //background-image: url('../assets/images/hudbgtest.png');
+    //background-repeat: no-repeat;
+    //background-size: cover;
+    //background-color: grey
+}
+
+i {
+    padding: 1px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#main_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+.map_container {
+    position: fixed;
+    top: 3.5vh;
+    right: 2vw;
+    height: 232px;
+    width: 235px;
+    box-shadow: 3px 3px 5px #1f1e1e, -2px -2px 5px white;
+}
+
+.distance_indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-weight: bold;
+    font-family: 'Kanit';
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    
+}
+
+.distance_indicator i,
+.street_name_indicator i {
+    margin-right: 2px;
+}
+
+.direction_indicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-weight: bold;
+    font-family: 'Kanit';
+    margin-right: 5px;
+    font-size: 0.9rem;
+}
+
+.street_name_indicator {
+    position: top;
+    bottom: 0;
+    right: 0;
+    font-weight: bold;
+    font-family: 'Kanit';
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.hud_container {
+    position: fixed;
+    left: 4vw;
+    bottom: 0vh;
+    height: 12.5vh;
+    width: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1%;
+}
+
+.statuses_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3vw;
+    margin: 1%;
+}
+
+.stat_item {
+    display: flex;
+    align-items: center;
+}
+
+.svg_box {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    text-align: center;
+}
+
+.progress_svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.icon_background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72%;
+    height: 70%;
+    background-color: #1f1e1e; 
+    opacity: 0.9;
+    z-index: 5;
+}
+
+.svg_box i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 10;
+    font-size: 0.75rem;
+}
+
+.progress_square,
+.progress_square_border {
+    fill: none;
+    stroke-linecap: round;
+}
+
+.progress_square_border {
+    stroke-width: 10;
+    stroke: #313030;
+    opacity: 0.9;
+}
+
+.progress_square {
+    stroke-width: 15;
+    opacity: 0.8;
+}
+
+.circular-chart {
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+    max-height: 250px;
+}
+
+.circle-bg {
+    fill: none;
+    stroke-width: 4;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 5;
+    stroke-linecap: round;
+    animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+    0% {
+        stroke-dasharray: 0 100;
+    }
+}
+
+.hunger_fill {
+    stroke: var(--hunger_fill_colour);
+}
+
+.thirst_fill {
+    stroke: var(--thirst_fill_colour);
+}
+
+.hygiene_fill {
+    stroke: var(--hygiene_fill_colour);
+}
+
+.stress_fill {
+    stroke: var(--stress_fill_colour);
+}
+
+.oxygen_fill {
+    stroke: var(--oxygen_fill_colour);
+}
+
+.hunger_border {
+    stroke: var(--hunger_border_colour);
+}
+
+.thirst_border {
+    stroke: var(--thirst_border_colour);
+}
+
+.hygiene_border {
+    stroke: var(--hygiene_border_colour);
+}
+
+.stress_border {
+    stroke: var(--stress_border_colour);
+}
+
+.oxygen_border {
+    stroke: var(--oxygen_border_colour);
+}
+
+.human_body {
+    width: 100px;
+    height: 150px;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 2vh;
+}
+
+.human_body svg {
+    position: absolute;
+    left: 0;
+    fill: rgba(255, 255, 255, 0.65);
+    height: 100%;
+    width: 100%;
+}
+
+.human_body path {
+    cursor: pointer;
+}
+
+.human_body path:hover {
+    fill: red;
+}
+
+.human_body path.injured {
+    fill: rgba(180, 0, 0, 0.3);
+}
+
+.health_armour_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.health_container,
+.armour_container {
+    display: flex;
+    align-items: center;
+}
+
+.progress_bar {
+    display: flex;
+}
+
+.health_bar, .armour_bar {
+    width: 100%;
+    height: 1vh;
+}
+
+.progress_segment {
+    flex: 1;
+    background-color: #1f1e1e;
+    border: 1px solid rgba(31, 30, 30, 0.5);
+    border-radius: 3px;
+    margin: 0 1px;
+}
+
+.progress_segment.filled.health_segment {
+    background-color: var(--health_segment_colour);
+}
+
+.progress_segment.filled.armour_segment {
+    background-color: var(--armour_segment_colour);
+}
+
+.buffs_debuffs_container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    height: 5.5vh;
+    margin-top: auto;
+}
+
+.buffs_container, .debuffs_container {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.buffs_container {
+    position: absolute;
+    top: 0;
+}
+
+.debuffs_container {
+    position: absolute;
+    bottom: 0;
+}
+
+.buff, .debuff {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: #1f1e1e;
+    color: #fff;
+    border-radius: 50%; 
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
