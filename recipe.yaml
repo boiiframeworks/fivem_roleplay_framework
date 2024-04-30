@@ -29,12 +29,20 @@ tasks:
     src: ./resources/[boii]/logo.png
     dest: ./logo.png
 
-  # Connect DB
-  - action: connect_database
-
+  # Remove unwanted files
+  - action: remove_path
+    path: ./resources/[boii]/readme.md
+  - action: remove_path
+    path: ./resources/[boii]/LICENSE
+  - action: remove_path
+    path: ./resources/[boii]/recipe.yaml
+  
   # Waste time
   - action: waste_time
-    seconds: 5  
+    seconds: 5 
+
+  # Connect DB
+  - action: connect_database 
 
   # Download bob74_ipl
   - action: download_github
