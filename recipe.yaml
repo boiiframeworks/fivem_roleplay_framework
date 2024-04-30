@@ -1,0 +1,55 @@
+$engine: 3
+$onesync: on
+name: BOII Roleplay Framework
+author: BOII Development
+description: Comprehensive roleplay framework for FiveM, designed to provide a rich roleplaying experience with jobs, housing, vehicles, and more.
+
+tasks:
+
+  # Download default CFX resources
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    ref: master
+    subpath: resources
+    dest: ./resources/[cfx-default]
+
+  # Download core BOII framework resources
+  - action: download_github
+    src: https://github.com/boiiframeworks/fivem_roleplay_framework/
+    ref: main
+    dest: ./resources/[boii]
+
+  # Move server.cfg to root
+  - action: move_path
+    src: ./resources/[boii]/server.cfg
+    dest: ./server.cfg
+
+  # Move logo to root
+  - action: move_path
+    src: ./resources/[boii]/logo.png
+    dest: ./logo.png
+
+  # Connect DB
+  - action: connect_database
+
+  # Waste time
+  - action: waste_time
+    seconds: 5  
+
+  # Download bob74_ipl
+  - action: download_github
+    src: https://github.com/Bob74/bob74_ipl
+    ref: master
+    dest: ./resources/[standalone]/bob74_ipl
+
+  # Download and unzip oxmysql
+  - action: download_file
+    path: ./tmp/files/oxmysql.zip
+    url: https://github.com/overextended/oxmysql/releases/latest/download/oxmysql.zip
+  - action: unzip
+    dest: ./resources/[standalone]
+    src: ./tmp/files/oxmysql.zip
+
+  # Clean up temporary files
+  - action: remove_path
+    path: ./tmp
