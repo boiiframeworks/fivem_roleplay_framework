@@ -75,6 +75,11 @@ local function get_data(key)
     elseif FRAMEWORK == 'custom' then
         -- Custom framework logic
     end
+
+    if not player_data then
+        print('No player data found in get_data()')
+    end
+
     return player_data
 end
 
@@ -106,10 +111,10 @@ local function get_identity()
         }
     elseif FRAMEWORK == 'es_extended' then
         player_data = {
-            first_name = fw.PlayerData.firstName,
-            last_name = fw.PlayerData.lastName,
-            dob = fw.PlayerData.dateofbirth,
-            sex = fw.PlayerData.sex,
+            first_name = fw.GetPlayerData().firstName or 'firstName missing',
+            last_name = fw.GetPlayerData().lastName or 'lastName missing',
+            dob = fw.GetPlayerData().dateofbirth or 'dateofbirth missing',
+            sex = fw.GetPlayerData().sex or 'sex missing',
             nationality = 'LS, Los Santos'
         }
     elseif FRAMEWORK == 'ox_core' then
@@ -125,6 +130,38 @@ local function get_identity()
     end
     return player_data
 end
+
+--- Retrieves player id from the server based on the framework.
+-- @param _src Player source identifier.
+-- @return Player's main identifier.
+-- @usage local player = utils.fw.get_player_id()
+local function get_player_id()
+    local player = get_data()
+    if not player then
+        print('No player data found')
+        return false
+    end
+    local player_id
+
+    if FRAMEWORK == 'boii_core' then
+        player_id = player.passport
+    elseif FRAMEWORK == 'qb-core' then 
+        player_id = player.citizenid
+    elseif FRAMEWORK == 'es_extended' then
+        player_id = player.identifier
+    elseif FRAMEWORK == 'ox_core' then
+        player_id = player.stateId
+    elseif FRAMEWORK == 'custom' then
+        -- Custom framework logic
+    end
+
+    if not player_id then
+        print('player_id is nil')
+    end
+
+    return player_id
+end
+
 
 --- @section Callback functions
 
@@ -162,10 +199,9 @@ end
 
 --- @section Assigning to utils table
 
-utils.fw = utils.fw or {}
-
 utils.fw.get_data = get_data
 utils.fw.get_identity = get_identity
 utils.fw.has_item = has_item
 utils.fw.player_has_job = player_has_job
 utils.fw.get_player_job_grade = get_player_job_grade
+utils.fw.get_player_id = get_player_id
