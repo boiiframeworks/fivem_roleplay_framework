@@ -70,8 +70,6 @@ end)
 
 --- @section Assigning local functions
 
-utils.groups = utils.groups or {}
-
 utils.groups.in_group = in_group
 utils.groups.get_player_groups = get_player_groups
 utils.groups.group_exists = group_exists
