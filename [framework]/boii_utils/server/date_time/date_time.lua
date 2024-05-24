@@ -109,9 +109,20 @@ local function add_ms_to_timestamp(timestamp_ms, milliseconds)
     return timestamp_ms + milliseconds
 end
 
---- @section Assign local functions
+--- Calculates the difference in seconds between two timestamps.
+-- @param start_time The start time in "YYYY-MM-DD HH:MM:SS" format.
+-- @param end_time The end time in "YYYY-MM-DD HH:MM:SS" format.
+-- @return The difference in seconds between the two timestamps.
+local function time_difference_in_seconds(start_time, end_time)
+    local pattern = "(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)"
+    local year, month, day, hour, min, sec = start_time:match(pattern)
+    local start = os.time{year=year, month=month, day=day, hour=hour, min=min, sec=sec}
+    year, month, day, hour, min, sec = end_time:match(pattern)
+    local finish = os.time{year=year, month=month, day=day, hour=hour, min=min, sec=sec}
+    return os.difftime(finish, start)
+end
 
-utils.dates = utils.dates or {}
+--- @section Assign local functions
 
 utils.dates.get_timestamp = get_timestamp
 utils.dates.convert_timestamp = convert_timestamp
@@ -121,3 +132,4 @@ utils.dates.add_days_to_date = add_days_to_date
 utils.dates.convert_timestamp_ms = convert_timestamp_ms
 utils.dates.timestamp_difference_ms = timestamp_difference_ms
 utils.dates.add_ms_to_timestamp = add_ms_to_timestamp
+utils.dates.time_difference_in_seconds = time_difference_in_seconds
